@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>InteliSystem.InteliMarketPlace.Repositories.CustomersRepositories</RootNamespace>
+    <AssemblyName>InteliSystem.InteliMarketPlace.Repositories.Customers</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.90" />
+    <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
+    <PackageReference Include="System.Text.Json" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Utils\Utils.csproj" />
+    <ProjectReference Include="..\..\..\Domains\Customers\Customers.csproj" />
+    <ProjectReference Include="..\..\..\Applications\CustomersApp\CustomersApp.csproj" />
+    <ProjectReference Include="..\GenericRepository\GenericRepository.csproj" />
+  </ItemGroup>
+
+</Project>
