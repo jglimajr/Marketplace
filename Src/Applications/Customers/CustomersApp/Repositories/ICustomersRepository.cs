@@ -1,11 +1,14 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using InteliSystem.InteliMarketPlace.Domains.Customers;
+using InteliSystem.InteliMarketPlace.Repositories;
 using InteliSystem.Utils.Globals.Interfaces;
 
 namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp.Repositories
 {
-    public interface ICustomersRepository : IRepositoryGeneralGuid<Customer>
+    public interface ICustomersRepository : IGenericRepository<Customer>
     {
         Task<int> UpdateEMail(Guid id, string email);
         Task<int> UpdatePassWord(Guid id, string password);

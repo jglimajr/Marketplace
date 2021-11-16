@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Utils\Utils.csproj" />
-    <ProjectReference Include="..\..\Domains\Sessions\Sessions.csproj" />
+    <ProjectReference Include="..\..\..\Utils\Utils.csproj" />
+    <ProjectReference Include="..\..\..\Domains\Sessions\Sessions.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructures\Repositories\GenericRepository\GenericRepository.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -10,7 +11,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>InteliSystem.InteliMarketPlace.Applications.SessionsApp</RootNamespace>
     <AssembyName>InteliSystem.InteliMarketPlace.Applications.SessionsApp</AssembyName>
   </PropertyGroup>

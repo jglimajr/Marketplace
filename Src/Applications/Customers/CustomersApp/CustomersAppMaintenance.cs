@@ -5,14 +5,15 @@ using System.Threading.Tasks;
 using FluentValidator;
 using InteliSystem.InteliMarketPlace.Applications.CustomersApp.Classes;
 using InteliSystem.InteliMarketPlace.Applications.CustomersApp.Repositories;
-using InteliSystem.InteliMarketPlace.Domains.Customers;
 using InteliSystem.Utils.Extensions;
 using InteliSystem.Utils.Globals.Classes;
 using InteliSystem.Utils.Globals.Enumerators;
+using InteliSystem.InteliMarketPlace.Domains.Customers;
+using Utils.Globals.Notifications;
 
 namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp
 {
-    public class CustomersAppMaintenance : Notifiable
+    public class CustomersAppMaintenance : InteliNotification
     {
         private ICustomersRepository _repository;
         public CustomersAppMaintenance(ICustomersRepository repository)
@@ -23,23 +24,30 @@ namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp
 
         public Task<Return> AddAsync(CustomerApp customerapp)
         {
-            if (customerapp.IsNull())
-            {
-                this.AddNotification("Customer", "Customer not informed");
-                return Task.Run<Return>(() => { return new Return(ReturnValues.Failed, null); });
-            }
 
-            var customer = new Customer(firstname: customerapp.Name, email: customerapp.EMail, password: customerapp.PassWord);
-
-            var retAux = this._repository.AddAsync(customer).GetAwaiter().GetResult();
-            if (retAux <= 0)
-            {
-                this.AddNotification("Customer", "Failure to include customer");
-                return Task.Run<Return>(() => { return new Return(ReturnValues.Failed, null); });
-            }
 
             return Task.Run<Return>(() =>
             {
+                if (customerapp.IsNull())
+                {
+                    this.AddNotification("Customer", "CustNotInf");
+                    return new Return(ReturnValues.Failed, null);
+                }
+
+                var customer = new Customer(firstname: customerapp.Name, email: customerapp.EMail, password: customerapp.PassWord);
+
+                if (customer.ExistNotifications)
+                {
+                    this.AddNotifications(customer.GetAllNotifications);
+                    return new Return(ReturnValues.Failed, null);
+                }
+
+                var retAux = this._repository.AddAsync(customer).GetAwaiter().GetResult();
+                if (retAux <= 0)
+                {
+                    this.AddNotification("Customer", "CustFailAdd");
+                    return new Return(ReturnValues.Failed, null);
+                }
                 var customerret = new CustomerProfile();
                 customerret.Load(customer);
                 return new Return(ReturnValues.Success, customerret);
@@ -52,20 +60,32 @@ namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp
             {
                 if (new Guid(id) != customer.Id)
                 {
-                    this.AddNotification("Customer", "Customer invalid");
+                    this.AddNotification("Customer", "CustNotInf");
                     return new Return(ReturnValues.Failed, null);
                 }
 
-                var customeraux = this._repository.GetAsync(customer.Id).GetAwaiter().GetResult();
-                customeraux.Load(customer);
-                // var customeraux = new Customer(id: customer.Id, firstname: customer.Name, birthdate: customer.BirthDate.ToDateTimeOrNull(),
-                //                                 gender: customer.Gender, email: customer.EMail);
+                var customeraux = this._repository.GetAsync(new Customer(customer.Id, "", "")).GetAwaiter().GetResult();
 
-                var retAux = this._repository.UpdateAsync(customeraux).GetAwaiter().GetResult();
-
-                if (retAux == false)
+                if (customeraux.IsNull())
                 {
-                    this.AddNotification("Customer", "Failure to update customer profile");
+                    this.AddNotification("Customer", "CustNotFound");
+                    return new Return(ReturnValues.Failed, null);
+                }
+                customeraux.Load(customer);
+
+                var customerUpdate = new Customer(id: customeraux.Id, firstname: customeraux.Name, birthdate: customeraux.BirthDate,
+                                                gender: customeraux.Gender, email: customeraux.EMail);
+                if (customerUpdate.ExistNotifications)
+                {
+                    this.AddNotifications(customerUpdate.GetAllNotifications);
+                    return new Return(ReturnValues.Failed, null);
+                }
+
+                var retAux = this._repository.UpdateAsync(customerUpdate).GetAwaiter().GetResult();
+
+                if (retAux <= 0)
+                {
+                    this.AddNotification("Customer", "CustFailUpdate");
                     return new Return(ReturnValues.Failed, null);
                 }
 
@@ -74,15 +94,15 @@ namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp
             });
         }
 
-        public Task<Return> GetAsyn(string id = null)
+        public Task<Return> GetAsync(string id)
         {
             if (id.IsEmpty())
                 return this.GetAllAsync();
 
-            var objAux = this._repository.GetAsync(new Guid(id)).GetAwaiter().GetResult();
+            var objAux = this._repository.GetAsync(new Customer(new Guid(id), "", "")).GetAwaiter().GetResult();
             if (objAux.IsNull())
             {
-                this.AddNotification("Customer", "Customer not found");
+                this.AddNotification("Customer", "CustNotFound");
                 return Task.Run<Return>(() => { return new Return(ReturnValues.Failed, null); });
             }
 
@@ -95,16 +115,11 @@ namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp
 
         public Task<Return> GetAllAsync()
         {
-            var objAux = this._repository.GetAllAsync().GetAwaiter().GetResult();
-
-            if (objAux.ToList().Count <= 0)
-            {
-                this.AddNotification("Customers", "Customers not found");
-                return Task.Run<Return>(() => { return new Return(ReturnValues.Failed, null); });
-            }
 
             return Task.Run<Return>(() =>
             {
+                var objAux = this._repository.GetAllAsync().GetAwaiter().GetResult();
+
                 IList<CustomerProfile> customers = new List<CustomerProfile>();
                 objAux.OrderBy(c => c.Name).ToList().ForEach(customer =>
                 {

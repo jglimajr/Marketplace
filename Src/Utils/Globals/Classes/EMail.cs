@@ -11,10 +11,11 @@ namespace Utils.Globals.Classes
         {
             if (value.IsNotEmpty())
             {
-                if (value.IsEMail())
-                    Value = value;
-                else
+                if (value.IsNotEMail())
                     AddNotification("E-Mail", "E-Mail is not valid");
+                else
+                    Value = value;
+
             }
         }
         public string Value { get; private set; }

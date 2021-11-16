@@ -26,8 +26,7 @@ namespace InteliSystem.InteliMarketPlace.Applications.SessionsApp
                     return new Return(ReturnValues.Failed, null);
                 }
 
-                var session = new Session()
-
+                return null;
             });
         }
 

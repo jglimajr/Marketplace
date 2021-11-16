@@ -30,7 +30,10 @@ namespace Shopping
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
+            services.AddControllers(options =>
+                {
+                    options.CacheProfiles.Add("DefaultCache", new CacheProfile() { Duration = 3600, NoStore = false });
+                })
                 .ConfigureApiBehaviorOptions(options =>
                 {
                     options.SuppressConsumesConstraintForFormFileParameters = true;
@@ -44,13 +47,19 @@ namespace Shopping
                     options.JsonSerializerOptions.IgnoreNullValues = true;
                 });
 
+
+
+            var cultures = new List<CultureInfo> { new CultureInfo("pt-BR"), new CultureInfo("en-US"), new CultureInfo("pt-PT"),
+                                                  new CultureInfo("es-MX"), new CultureInfo("es-AR"), new CultureInfo("es-CL") };
+
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("pt-BR");
-                options.SupportedCultures = new List<CultureInfo> { new CultureInfo("pt-BR"), new CultureInfo("en-US") };
-                options.RequestCultureProviders = new List<IRequestCultureProvider>();
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(cultures[0]);
+                options.SupportedCultures = cultures;
+                options.SupportedUICultures = cultures;
             });
 
+            services.AddLocalization();
             services.AddResponseCompression();
             services.AddResponseCaching();
             services.AddDependences(configuration: Configuration);
@@ -79,6 +88,17 @@ namespace Shopping
             }
 
             app.UseHttpsRedirection();
+
+            // var suportedCultures = new[] { "pt-BR", "en-US", "it", "pt-PT", "es-MX", "es-AR", "es-CL" };
+
+            // var localizationOptions = new RequestLocalizationOptions()
+            //         .SetDefaultCulture(suportedCultures[0])
+            //         .AddSupportedCultures(suportedCultures)
+            //         .AddSupportedUICultures(suportedCultures);
+
+            // app.UseRequestLocalization(localizationOptions);
+
+            app.UseRequestLocalization();
 
             app.UseRouting();
 

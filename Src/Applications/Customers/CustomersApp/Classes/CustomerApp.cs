@@ -9,7 +9,6 @@ namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp
     {
         public string Name { get; set; }
         public string EMail { get; set; }
-        [JsonIgnore]
         public string PassWord { get; set; }
 
     }

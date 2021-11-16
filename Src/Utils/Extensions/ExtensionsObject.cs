@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace InteliSystem.Utils.Extensions
 {
@@ -44,30 +46,60 @@ namespace InteliSystem.Utils.Extensions
              {
                  Parallel.ForEach(loadedprops, loadedprop =>
                  {
-                     if (innerprop.Name == loadedprop.Name)
+                     var custattibs = innerprop.GetCustomAttribute(typeof(System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute));
+                     if (custattibs.IsNull())
                      {
-                         var value = loadedprop.GetValue(loadedobject);
-                         var innervalue = innerprop.GetValue(innerobject);
-                         if (innerprop.PropertyType.ObjectToString().ToLower().Contains("intelisystem") && innerprop.PropertyType.BaseType == typeof(System.Object))
+                         if (innerprop.Name == loadedprop.Name)
                          {
-                             innervalue.Load(value);
-                             innerprop.SetValue(innerobject, innervalue);
-                         }
-                         else
-                         if (value.IsNotNull() && innervalue.ObjectToString() != value.ObjectToString())
-                         {
-                             if ((loadedprop.PropertyType == typeof(DateTime) || loadedprop.PropertyType == typeof(DateTime?)) && innerprop.PropertyType == typeof(string))
+                             var value = loadedprop.GetValue(loadedobject);
+                             var innervalue = innerprop.GetValue(innerobject);
+                             if (innerprop.PropertyType.ObjectToString().ToLower().Contains("intelisystem") && innerprop.PropertyType.BaseType == typeof(System.Object))
                              {
-                                 var valueAux = (DateTime)value;
-                                 innerprop.SetValue(innerobject, valueAux.ToStringDateBrazilian());
-                             }
-                             else if ((innerprop.PropertyType == typeof(DateTime) || innerprop.PropertyType == typeof(DateTime?)) && loadedprop.PropertyType == typeof(string))
-                             {
-                                 var valueAux = value.ObjectToString().ToDateTime();
-                                 innerprop.SetValue(innerobject, valueAux);
+                                 innervalue.Load(value);
+                                 innerprop.SetValue(innerobject, innervalue);
                              }
                              else
-                                 innerprop.SetValue(innerobject, value);
+                             if (value.IsNotNull() && innervalue.ObjectToString() != value.ObjectToString())
+                             {
+                                 if ((loadedprop.PropertyType == typeof(DateTime) || loadedprop.PropertyType == typeof(DateTime?)) && innerprop.PropertyType == typeof(string))
+                                 {
+                                     var valueAux = (DateTime)value;
+                                     innerprop.SetValue(innerobject, valueAux.ToStringDateBrazilian());
+                                 }
+                                 else if ((innerprop.PropertyType == typeof(DateTime) || innerprop.PropertyType == typeof(DateTime?)) && loadedprop.PropertyType == typeof(string))
+                                 {
+                                     var valueAux = value.ObjectToString().ToDateTime();
+                                     innerprop.SetValue(innerobject, valueAux);
+                                 }
+                                 else
+                                     innerprop.SetValue(innerobject, value);
+                             }
+                         }
+                         if (innerprop.Name == loadedprop.Name)
+                         {
+                             var value = loadedprop.GetValue(loadedobject);
+                             var innervalue = innerprop.GetValue(innerobject);
+                             if (innerprop.PropertyType.ObjectToString().ToLower().Contains("intelisystem") && innerprop.PropertyType.BaseType == typeof(System.Object))
+                             {
+                                 innervalue.Load(value);
+                                 innerprop.SetValue(innerobject, innervalue);
+                             }
+                             else
+                             if (value.IsNotNull() && innervalue.ObjectToString() != value.ObjectToString())
+                             {
+                                 if ((loadedprop.PropertyType == typeof(DateTime) || loadedprop.PropertyType == typeof(DateTime?)) && innerprop.PropertyType == typeof(string))
+                                 {
+                                     var valueAux = (DateTime)value;
+                                     innerprop.SetValue(innerobject, valueAux.ToStringDateBrazilian());
+                                 }
+                                 else if ((innerprop.PropertyType == typeof(DateTime) || innerprop.PropertyType == typeof(DateTime?)) && loadedprop.PropertyType == typeof(string))
+                                 {
+                                     var valueAux = value.ObjectToString().ToDateTime();
+                                     innerprop.SetValue(innerobject, valueAux);
+                                 }
+                                 else
+                                     innerprop.SetValue(innerobject, value);
+                             }
                          }
                      }
                  });

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>InteliSystem.InteliMarketPlace.Repositories.CustomersRepositories</RootNamespace>
     <AssemblyName>InteliSystem.InteliMarketPlace.Repositories.Customers</AssemblyName>
   </PropertyGroup>
@@ -12,16 +12,17 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.90" />
-    <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <!-- <PackageReference Include="Dapper.Contrib" Version="2.0.78" /> -->
     <PackageReference Include="System.Text.Json" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Utils\Utils.csproj" />
     <ProjectReference Include="..\..\..\Domains\Customers\Customers.csproj" />
-    <ProjectReference Include="..\..\..\Applications\CustomersApp\CustomersApp.csproj" />
+    <ProjectReference Include="..\..\..\Applications\Customers\CustomersApp\CustomersApp.csproj" />
     <ProjectReference Include="..\GenericRepository\GenericRepository.csproj" />
+    <ProjectReference Include="..\..\..\Utils.Dapper.Extensions\Utils.Dapper.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using InteliSystem.Utils.Dapper.Extensions.Attributes;
 using InteliSystem.Utils.Globals.Enumerators;
 using Utils.Globals.Notifications;
 
@@ -25,7 +26,9 @@ namespace InteliSystem.Utils.Globals.Classes
         [Key]
         public virtual Guid Id { get; private set; }
         public StatusValues Status { get; private set; }
+        [InsertProperty(true), UpdateProperty(false)]
         public virtual DateTime DateTimeCreate { get; private set; }
+        [InsertProperty(false), UpdateProperty(true)]
         public virtual DateTime DateTimeUpdate { get; private set; }
     }
 }

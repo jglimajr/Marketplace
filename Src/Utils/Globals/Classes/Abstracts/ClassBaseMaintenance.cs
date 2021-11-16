@@ -1,18 +1,18 @@
 using System;
 using System.Threading.Tasks;
-using FluentValidator;
+using InteliSystem.InteliMarketPlace.Repositories;
 using InteliSystem.Utils.Globals.Enumerators;
-using InteliSystem.Utils.Globals.Interfaces;
+using Utils.Globals.Notifications;
 
 namespace InteliSystem.Utils.Globals.Classes.Abstracts
 {
-    public abstract class ClassBaseMaintenance<T> : Notifiable, IDisposable where T : class
+    public abstract class ClassBaseMaintenance<T> : InteliNotification, IDisposable where T : class
     {
-        private readonly IRepositoryGeneralGuid _repository;
+        private readonly IGenericRepository<T> _repository;
 
-        public ClassBaseMaintenance(IRepositoryGeneralGuid repository)
+        public ClassBaseMaintenance(IBaseRepository repository)
         {
-            this._repository = repository;
+            this._repository = (IGenericRepository<T>)repository;
         }
 
         public virtual void Dispose()
@@ -24,7 +24,7 @@ namespace InteliSystem.Utils.Globals.Classes.Abstracts
         {
             return Task.Run<object>(() =>
             {
-                this._repository.AddAsync<T>(app).GetAwaiter().GetResult();
+                this._repository.AddAsync(app).GetAwaiter().GetResult();
                 return new Return(ReturnValues.Success, app);
             });
         }

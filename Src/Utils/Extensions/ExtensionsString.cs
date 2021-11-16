@@ -115,20 +115,20 @@ namespace InteliSystem.Utils.Extensions
             return double.TryParse(value, out double retorno);
         }
 
-        public static bool IsEMail(this string value)
+        public static bool IsNotEMail(this string value)
         {
-            var regExp = @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$";
-            var rg = new Regex(regExp);
-            if (rg.IsMatch(value))
-                return true;
+            // var regExp = @"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$";
+            // var rg = new Regex(regExp);
+            // if (rg.IsMatch(value))
+            //     return true;
             try
             {
                 var mail = new System.Net.Mail.MailAddress(value);
-                return (mail.Address == value);
+                return (mail.Address != value);
             }
             catch
             {
-                return false;
+                return true;
             }
         }
 

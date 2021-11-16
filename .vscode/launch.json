@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": ".NET Core Blazor (WebAssembly)",
-            "type": "blazorwasm",
+            "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/Service/Blazor/Shopping/bin/Debug/net5.0/InteliSystem.Blazor.Shopping.dll",
@@ -29,7 +29,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Service/Api/Shopping/bin/Debug/netcoreapp3.1/InteliSystem.Api.Shopping.dll",
+            "program": "${workspaceFolder}/Service/Api/Shopping/bin/Debug/net5.0/InteliSystem.Api.Shopping.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Service/Api/Shopping",
             "stopAtEntry": false,
@@ -39,9 +39,6 @@
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
             }
         },
         

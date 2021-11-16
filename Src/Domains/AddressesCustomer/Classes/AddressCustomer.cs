@@ -1,17 +1,15 @@
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
+using InteliSystem.Utils.Extensions;
 using InteliSystem.Utils.Globals.Classes;
 using InteliSystem.Utils.Globals.Enumerators;
 
-namespace InteliSystem.InteliMarketPlace.Domains.CustomerAddresses
+namespace InteliSystem.InteliMarketPlace.Domains.AddressesCustomer
 {
-    [Table("[CustomerAddresses]")]
-    public class CustomerAddress : ClassBaseGuid
+    public class AddressCustomer : ClassBaseGuid
     {
-
-        private CustomerAddress()
+        private AddressCustomer()
             : base() { }
-        public CustomerAddress(Guid idCustomer, string description, string address, string number, string complement, string neighborhood, string city, string state, string country, string zipCode)
+        public AddressCustomer(Guid idCustomer, string description, string address, string number, string complement, string neighborhood, string city, string state, string country, string zipCode)
             : this()
         {
             IdCustomer = idCustomer;
@@ -26,7 +24,7 @@ namespace InteliSystem.InteliMarketPlace.Domains.CustomerAddresses
             ZipCode = zipCode;
         }
 
-        public CustomerAddress(Guid id, Guid idCustomer, string description, string address, string number, string complement, string neighborhood,
+        public AddressCustomer(Guid id, Guid idCustomer, string description, string address, string number, string complement, string neighborhood,
                                string city, string state, string country, string zipCode, StatusValues status = StatusValues.Active)
             : base(id, status)
         {
@@ -40,6 +38,14 @@ namespace InteliSystem.InteliMarketPlace.Domains.CustomerAddresses
             State = state;
             Country = country;
             ZipCode = zipCode;
+        }
+
+        private void Validate()
+        {
+            if (IdCustomer.IsNull())
+                this.AddNotification("IdCustomer", "Cliente não informado");
+            if (Address.IsEmpty())
+                this.AddNotification("Address", "Endereço não informado");
         }
         public Guid IdCustomer { get; private set; }
         public string Description { get; private set; }

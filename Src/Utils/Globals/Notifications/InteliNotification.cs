@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Serialization;
-using Dapper.Contrib.Extensions;
+using System.Linq;
+using InteliSystem.Utils.Dapper.Extensions.Attributes;
 
 namespace Utils.Globals.Notifications
 {
@@ -18,7 +16,16 @@ namespace Utils.Globals.Notifications
         {
             this._messages.Add(property, message);
         }
-        [Write(false)]
+        public void AddNotifications(Dictionary<string, string> add)
+        {
+            add.ToList().ForEach(reg =>
+            {
+                this._messages.Add(reg.Key, reg.Value);
+            });
+        }
+        [WriteProperty(false)]
+        public Dictionary<string, string> GetAllNotifications => this._messages;
+        [WriteProperty(false)]
         public bool ExistNotifications => (this._messages.Count > 0);
 
     }
