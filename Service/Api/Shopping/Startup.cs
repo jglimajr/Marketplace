@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,8 +14,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Shopping.Extensions;
+using Shopping.Util.Authentications;
 
 namespace Shopping
 {
@@ -47,7 +50,24 @@ namespace Shopping
                     options.JsonSerializerOptions.IgnoreNullValues = true;
                 });
 
+            services.AddAuthentication(a =>
+            {
+                a.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(j =>
+            {
+                j.RequireHttpsMetadata = true;
+                j.SaveToken = true;
+                j.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(JwtKey.Key)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                };
 
+            });
 
             var cultures = new List<CultureInfo> { new CultureInfo("pt-BR"), new CultureInfo("en-US"), new CultureInfo("pt-PT"),
                                                   new CultureInfo("es-MX"), new CultureInfo("es-AR"), new CultureInfo("es-CL") };
@@ -89,18 +109,11 @@ namespace Shopping
 
             app.UseHttpsRedirection();
 
-            // var suportedCultures = new[] { "pt-BR", "en-US", "it", "pt-PT", "es-MX", "es-AR", "es-CL" };
-
-            // var localizationOptions = new RequestLocalizationOptions()
-            //         .SetDefaultCulture(suportedCultures[0])
-            //         .AddSupportedCultures(suportedCultures)
-            //         .AddSupportedUICultures(suportedCultures);
-
-            // app.UseRequestLocalization(localizationOptions);
-
             app.UseRequestLocalization();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

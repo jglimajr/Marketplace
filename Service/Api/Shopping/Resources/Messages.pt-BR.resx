@@ -165,4 +165,12 @@
     <value>Ôps! Lascou foi tudo!</value>
     <comment/>
   </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Cliente</value>
+    <comment/>
+  </data>
+  <data name="CustUserOrPass" xml:space="preserve">
+    <value>Usuário ou Senha Inválidos</value>
+    <comment/>
+  </data>
 </root>

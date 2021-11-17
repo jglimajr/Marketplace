@@ -1,10 +1,13 @@
 using System.Data;
 using InteliSystem.InteliMarketPlace.Applications.CustomersApp;
 using InteliSystem.InteliMarketPlace.Applications.CustomersApp.Repositories;
+using InteliSystem.InteliMarketPlace.Applications.LoginsApp;
+using InteliSystem.InteliMarketPlace.Applications.SessionsApp;
 using InteliSystem.InteliMarketPlace.Repositories.CustomersRepositories;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SessionsRepositories;
 
 namespace Shopping.Extensions
 {
@@ -18,9 +21,12 @@ namespace Shopping.Extensions
             //-------------
             //Config Applications
             services.AddTransient<CustomersAppMaintenance>();
+            services.AddTransient<LoginsAppMaintenance>();
+            services.AddTransient<SessionAppMaintenance>();
             //-------------
             //Config Repository
             services.AddTransient<ICustomersRepository, CustomersRepositories>();
+            services.AddTransient<ISessionRepository, SessionRepository>();
             //-------------
         }
     }

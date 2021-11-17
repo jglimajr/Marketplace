@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\CustomersApp\CustomersApp.csproj" />
+    <ProjectReference Include="..\..\..\Utils\Utils.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>InteliSystem.InteliMarketPlace.Applications.LoginsApp</RootNamespace>
+    <AssemblyName>InteliSystem.InteliMarketPlace.Applications.LoginsApp</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+</Project>

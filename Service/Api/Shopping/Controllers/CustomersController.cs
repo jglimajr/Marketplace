@@ -2,6 +2,7 @@ using System.Net;
 using System.Threading.Tasks;
 using InteliSystem.InteliMarketPlace.Applications.CustomersApp;
 using InteliSystem.InteliMarketPlace.Applications.CustomersApp.Classes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Shopping.Resources;
@@ -15,47 +16,52 @@ namespace Shopping.Controllers
     public class CustomersController : Controller
     {
         private readonly CustomersAppMaintenance _app;
-        public CustomersController(CustomersAppMaintenance app)
+        private readonly IStringLocalizer<Messages> _localizer;
+        public CustomersController(CustomersAppMaintenance app, [FromServices] IStringLocalizer<Messages> localizer)
         {
             this._app = app;
+            this._localizer = localizer;
         }
         [HttpPost]
         [Route("add/v1")]
         [SwaggerOperation(summary: "Customer", description: "CRUD of Customers")]
         [SwaggerResponse((int)HttpStatusCode.OK, type: typeof(CustomerProfile))]
-        public async Task<IActionResult> AddAsync([FromBody] CustomerApp customer, [FromServices] IStringLocalizer<Messages> localizer)
+        [Authorize(Roles = "customer, Manager")]
+        public async Task<IActionResult> AddAsync([FromBody] CustomerApp customer)
         {
             try
             {
                 var retaux = await this._app.AddAsync(customer);
                 if (this._app.ExistNotifications)
-                    return InteliCustomMessage.MountMessage(new Message(title: localizer["CustomerAdd"].Value, notifications: this._app.GetAllNotifications), localizer);
+                    return InteliCustomMessage.MountMessage(new Message(title: this._localizer["CustomerAdd"].Value, notifications: this._app.GetAllNotifications), this._localizer);
                 return Ok(retaux);
             }
             catch (System.Exception e)
             {
-                return InteliCustomMessage.MountMessage(new Message(title: localizer["GerException"].Value, exception: e), localizer);
+                return InteliCustomMessage.MountMessage(new Message(title: this._localizer["GerException"].Value, exception: e), this._localizer);
             }
         }
         [HttpPut]
         [Route("update/v1/{id}")]
-        public async Task<IActionResult> UpdateAsync(string id, [FromBody] CustomerProfile customer, [FromServices] IStringLocalizer<Messages> localizer)
+        [Authorize(Roles = "customer")]
+        public async Task<IActionResult> UpdateAsync(string id, [FromBody] CustomerProfile customer)
         {
             try
             {
                 var retaux = await this._app.UpdateAsync(id, customer);
                 if (this._app.ExistNotifications)
-                    return InteliCustomMessage.MountMessage(new Message(title: localizer["GerOps"].Value, notifications: this._app.GetAllNotifications), localizer);
+                    return InteliCustomMessage.MountMessage(new Message(title: this._localizer["GerOps"].Value, notifications: this._app.GetAllNotifications), this._localizer);
                 return Ok(retaux);
             }
             catch (System.Exception e)
             {
-                return InteliCustomMessage.MountMessage(new Message(title: localizer["GerException"].Value, exception: e), localizer);
+                return InteliCustomMessage.MountMessage(new Message(title: this._localizer["GerException"].Value, exception: e), this._localizer);
             }
         }
 
         [HttpGet]
         [Route("get/v1/{id?}")]
+        [Authorize(Roles = "customer, Manager")]
         public async Task<IActionResult> Get(string id)
         {
             try
@@ -70,6 +76,7 @@ namespace Shopping.Controllers
         }
         [HttpGet]
         [Route("getall/v1/{id?}")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> GetAll()
         {
             try

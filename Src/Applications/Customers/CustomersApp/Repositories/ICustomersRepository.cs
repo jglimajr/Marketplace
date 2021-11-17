@@ -10,7 +10,8 @@ namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp.Repositories
 {
     public interface ICustomersRepository : IGenericRepository<Customer>
     {
-        Task<int> UpdateEMail(Guid id, string email);
-        Task<int> UpdatePassWord(Guid id, string password);
+        Task<int> UpdateEMailAsync(Guid id, string email);
+        Task<int> UpdatePassWordAsync(Guid id, string password);
+        Task<Customer> GetByEMailAsync(string email);
     }
 }

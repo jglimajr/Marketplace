@@ -165,4 +165,12 @@
     <value>Ôps! Crach!!</value>
     <comment/>
   </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Customer</value>
+    <comment/>
+  </data>
+  <data name="CustUserOrPass" xml:space="preserve">
+    <value>Username or password is invalid</value>
+    <comment/>
+  </data>
 </root>

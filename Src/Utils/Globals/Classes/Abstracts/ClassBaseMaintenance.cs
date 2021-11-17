@@ -8,25 +8,16 @@ namespace InteliSystem.Utils.Globals.Classes.Abstracts
 {
     public abstract class ClassBaseMaintenance<T> : InteliNotification, IDisposable where T : class
     {
-        private readonly IGenericRepository<T> _repository;
+        private readonly IBaseRepository _repository;
 
         public ClassBaseMaintenance(IBaseRepository repository)
         {
-            this._repository = (IGenericRepository<T>)repository;
+            this._repository = repository;
         }
 
         public virtual void Dispose()
         {
             this._repository.Dispose();
-        }
-
-        public virtual Task<object> AddAsync(T app)
-        {
-            return Task.Run<object>(() =>
-            {
-                this._repository.AddAsync(app).GetAwaiter().GetResult();
-                return new Return(ReturnValues.Success, app);
-            });
         }
     }
 }

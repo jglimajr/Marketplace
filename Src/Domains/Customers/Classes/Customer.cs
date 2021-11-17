@@ -22,7 +22,7 @@ namespace InteliSystem.InteliMarketPlace.Domains.Customers
             this.BirthDate = birthdate;
             this.Gender = gender;
             this.EMail = email;
-            this.PassWord = password.ToSha512($"{this.Id}{password}{EMail}");
+            this.PassWord = password.ToSha512($"{password}{EMail.ToLower()}");
             Validate();
         }
         public Customer(Guid id, string firstname, string email, DateTime? birthdate = null, GenderValues gender = GenderValues.Uninformed,

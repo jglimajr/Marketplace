@@ -130,5 +130,21 @@ namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp
                 return new Return(ReturnValues.Success, customers);
             });
         }
+
+        public Task<Return> GetByEMailAsync(string email)
+        {
+            return Task.Run<Return>(() =>
+            {
+                var objAux = this._repository.GetByEMailAsync(email).GetAwaiter().GetResult();
+                if (objAux.IsNull())
+                {
+                    this.AddNotification("Customer", "CustNotFound");
+                    return new Return(ReturnValues.Failed, null);
+                }
+
+                return new Return(ReturnValues.Success, new CustomerProfile().Load(objAux));
+
+            });
+        }
     }
 }

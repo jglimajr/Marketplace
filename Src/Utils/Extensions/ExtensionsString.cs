@@ -252,5 +252,10 @@ namespace InteliSystem.Utils.Extensions
             }
         }
 
+        public static string ToBase64(this string value)
+        {
+            return Convert.ToBase64String(Encoding.ASCII.GetBytes(value));
+        }
+
     }
 }
