@@ -4,32 +4,12 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": ".NET Core Blazor (WebAssembly)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Service/Blazor/Shopping/bin/Debug/net5.0/InteliSystem.Blazor.Shopping.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/Service/Blazor/Shopping",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
-            }
-        },
-        {
+         {
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Service/Api/Shopping/bin/Debug/net5.0/InteliSystem.Api.Shopping.dll",
+            "program": "${workspaceFolder}/Service/Api/Shopping/bin/Debug/net6.0/InteliSystem.InteliMarketPlace.Api.Shopping.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Service/Api/Shopping",
             "stopAtEntry": false,

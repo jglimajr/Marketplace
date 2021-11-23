@@ -29,7 +29,18 @@ namespace InteliSystem.InteliMarketPlace.Applications.SessionsApp
                     return new Return(ReturnValues.Failed, null);
                 }
 
-                var session = new Session(app.IdCustomer, app.Device, app.Token, app.RefreshToken);
+                var id = Guid.NewGuid();
+                var user = new User()
+                {
+                    Id = id.ToString(),
+                    Device = app.Device,
+                    IdCustomer = app.IdCustomer.ToString()
+                };
+
+                var token = JwtAuthentication.GetToken(user);
+                var refreshtoken = JwtAuthentication.GetRefreshToken();
+
+                var session = new Session(id, app.IdCustomer, app.Device, token, refreshtoken);
 
                 if (session.ExistNotifications)
                 {
@@ -75,17 +86,19 @@ namespace InteliSystem.InteliMarketPlace.Applications.SessionsApp
             });
         }
 
-        public Task<Return> RefreshTokenAsyn(string token, string refreshtoken)
+        public Task<Return> RefreshTokenAsync(string token, string refreshtoken)
         {
             return Task.Run<Return>(() =>
             {
                 var principal = JwtAuthentication.GetClaimsPrincipal(token);
 
 
-                var idcustomer = principal.FindFirst(ClaimTypes.Actor);
+                var id = principal.FindFirst(ClaimTypes.Actor);
+                var idcustomer = principal.FindFirst("IdCustomer");
                 var device = principal.FindFirst("Device");
 
-                var session = this._repository.GetRefreshTokenAsync(idcustomer.Value, device.Value).GetAwaiter().GetResult();
+                // var session = this._repository.GetRefreshTokenAsync(idcustomer.Value, device.Value).GetAwaiter().GetResult();
+                var session = this._repository.GetAsync(new Session(id: new Guid(id.Value), idcustomer: new Guid(idcustomer.Value), device: device.Value, "", "")).GetAwaiter().GetResult();
 
                 if (refreshtoken != session.RefreshToken || token != session.Token)
                 {

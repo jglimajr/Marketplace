@@ -1,15 +1,18 @@
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
+using InteliSystem.InteliMarketPlace.Applications.AddressesCustomer;
 using InteliSystem.InteliMarketPlace.Applications.CustomersApp;
 using InteliSystem.InteliMarketPlace.Applications.CustomersApp.Repositories;
 using InteliSystem.InteliMarketPlace.Applications.LoginsApp;
 using InteliSystem.InteliMarketPlace.Applications.SessionsApp;
 using InteliSystem.InteliMarketPlace.Repositories.CustomersRepositories;
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using SessionsRepositories;
 
-namespace Shopping.Extensions
+namespace InteliSystem.InteliMarketPlace.Api.Shopping.ServicesDependenceExtensions
 {
     public static class ServiceDependenceExtension
     {
@@ -18,13 +21,14 @@ namespace Shopping.Extensions
             //ConfigDb
             // services.AddScoped<IConnection>(s => new Connection(configuration.GetConnectionString("AzureDesenv")));
             services.AddScoped<IDbConnection>(s => new SqlConnection(configuration.GetConnectionString("AzureDesenv")));
-            //-------------
-            //Config Applications
+            // //-------------
+            // //Config Applications
             services.AddTransient<CustomersAppMaintenance>();
             services.AddTransient<LoginsAppMaintenance>();
             services.AddTransient<SessionAppMaintenance>();
-            //-------------
-            //Config Repository
+            services.AddTransient<AddressesCustomerAppMaintenance>();
+            // //-------------
+            // //Config Repository
             services.AddTransient<ICustomersRepository, CustomersRepositories>();
             services.AddTransient<ISessionRepository, SessionRepository>();
             //-------------

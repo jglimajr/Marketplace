@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FluentValidator;
 using InteliSystem.InteliMarketPlace.Applications.CustomersApp.Classes;
 using InteliSystem.InteliMarketPlace.Applications.CustomersApp.Repositories;
 using InteliSystem.Utils.Extensions;
@@ -15,7 +14,7 @@ namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp
 {
     public class CustomersAppMaintenance : InteliNotification
     {
-        private ICustomersRepository _repository;
+        private readonly ICustomersRepository _repository;
         public CustomersAppMaintenance(ICustomersRepository repository)
             : base()
         {
@@ -48,8 +47,8 @@ namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp
                     this.AddNotification("Customer", "CustFailAdd");
                     return new Return(ReturnValues.Failed, null);
                 }
-                var customerret = new CustomerProfile();
-                customerret.Load(customer);
+                var customerret = new CustomerProfile().Load(customer);
+
                 return new Return(ReturnValues.Success, customerret);
             });
         }

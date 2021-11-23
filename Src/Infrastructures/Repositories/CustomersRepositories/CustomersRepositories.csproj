@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>InteliSystem.InteliMarketPlace.Repositories.CustomersRepositories</RootNamespace>
     <AssemblyName>InteliSystem.InteliMarketPlace.Repositories.Customers</AssemblyName>
   </PropertyGroup>
@@ -14,7 +14,7 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
     <!-- <PackageReference Include="Dapper.Contrib" Version="2.0.78" /> -->
-    <PackageReference Include="System.Text.Json" Version="5.0.2" />
+    <!-- <PackageReference Include="System.Text.Json" Version="5.0.2" /> -->
   </ItemGroup>
 
   <ItemGroup>

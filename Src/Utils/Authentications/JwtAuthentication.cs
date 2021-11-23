@@ -17,8 +17,7 @@ namespace InteliSystem.Utils.Authentications
             var myclaims = new Claim[]
                 {
                     new Claim(ClaimTypes.Actor, user.Id.ToString()),
-                    new Claim(ClaimTypes.Email, user.EMail),
-                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim("IdCustomer", user.IdCustomer),
                     new Claim("Device", user.Device),
                     new Claim(ClaimTypes.Role, "customer")
                 };

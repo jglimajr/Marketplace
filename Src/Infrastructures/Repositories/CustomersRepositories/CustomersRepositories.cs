@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Dapper;
 using InteliSystem.InteliMarketPlace.Applications.CustomersApp.Repositories;
 using InteliSystem.InteliMarketPlace.Domains.Customers;
-using InteliSystem.Utils.Dapper.Extensions;
-using InteliSystem.Utils.Extensions;
 
 namespace InteliSystem.InteliMarketPlace.Repositories.CustomersRepositories
 {

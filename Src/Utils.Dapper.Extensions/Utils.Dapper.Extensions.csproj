@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>InteliSystem.Utils.Dapper.Extensions</RootNamespace>
     <AssemblyName>InteliSystem.Utils.Dapper.Extensions</AssemblyName>
+    <AssemblyVersion>2021.11.23.00001</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">

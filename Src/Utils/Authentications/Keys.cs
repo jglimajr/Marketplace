@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shopping.Models
+namespace InteliSystem.Utils.Authentications
 {
-    public class Token
+    public class Keys
     {
-        public string Key { get; set; }
+        public string Token { get; set; }
         public string RefreshToken { get; set; }
     }
 }

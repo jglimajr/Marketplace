@@ -4,12 +4,12 @@
     <ProjectReference Include="..\..\Utils\Utils.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <PackageReference Include="FluentValidator" Version="2.0.4" />
-  </ItemGroup>
+  </ItemGroup> -->
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>InteliSystem.InteliMarketPlace.Domains.AddressesCustomer</RootNamespace>
     <AssemblyName>InteliSystem.InteliMarketPlace.Domains.AddressesCustomer</AssemblyName>
   </PropertyGroup>
