@@ -5,7 +5,7 @@ using InteliSystem.Utils.Globals.Enumerators;
 using InteliSystem.Utils.Globals.Functions;
 using Utils.Globals.Notifications;
 
-namespace InteliSystem.InteliMarketPlace.Domains.Products.Classes
+namespace InteliSystem.InteliMarketPlace.Domains.Products
 {
     public class Category : InteliNotification
     {
@@ -37,7 +37,7 @@ namespace InteliSystem.InteliMarketPlace.Domains.Products.Classes
         {
             if (this.Id.IsEmpty())
                 this.AddNotification("Category.Id", "Id not informed");
-                
+
             if (this.Name.IsEmpty())
                 this.AddNotification("Category.Name", "Name not informed");
         }
@@ -60,7 +60,7 @@ namespace InteliSystem.InteliMarketPlace.Domains.Products.Classes
 
         public string Id { get; private set; }
         public string Name { get; private set; }
-        public string Description { get; private set; }
+        public string Description { get; private set; }     
         public StatusValues Status { get; private set; }
         public DateTime DateTimeCreation { get; private set; }
         public DateTime? DateTimeUpdate { get; private set; }

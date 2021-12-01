@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Domains\Products\Products.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructures\Repositories\GenericRepository\GenericRepository.csproj" />
+    <ProjectReference Include="..\..\..\Utils\Utils.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>InteliSystem.InteliMarketPlace.Applications.CategoriesApp</RootNamespace>
+    <AssemblyName>InteliSystem.InteliMarketPlace.Applications.CategoriesApp</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+</Project>

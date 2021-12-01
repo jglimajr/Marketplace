@@ -1,7 +1,7 @@
 using System;
 using InteliSystem.Utils.Globals.Classes;
 
-namespace InteliSystem.InteliMarketPlace.Domains.Products.Classes
+namespace InteliSystem.InteliMarketPlace.Domains.Products
 {
     public class Product : ClassBaseGuid
     {
