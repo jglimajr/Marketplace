@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Text;
+using InteliSystem.InteliMarketPlace.Api.Shopping.ServicesDependenceExtensions;
 using InteliSystem.Utils.Authentications;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -60,7 +61,7 @@ builder.Services.AddResponseCompression();
 
 builder.Services.AddResponseCaching();
 
-// builder.Services.AddDependences(configuration);
+builder.Services.AddDependences(configuration);
 
 builder.Services.AddCors();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

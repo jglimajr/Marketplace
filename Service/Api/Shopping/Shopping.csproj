@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <!-- <Nullable>enable</Nullable> -->
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>InteliSystem.InteliMarketPlace.Api.Shopping</RootNamespace>
     <AssemblyName>InteliSystem.InteliMarketPlace.Api.Shopping</AssemblyName>
@@ -31,13 +30,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Src\Utils\Utils.csproj" />
-    <ProjectReference Include="..\..\..\Src\Applications\Customers\SessionsApp\SessionsApp.csproj" />
-    <ProjectReference Include="..\..\..\Src\Applications\Customers\LoginsApp\LoginsApp.csproj" />
-    <ProjectReference Include="..\..\..\Src\Applications\Customers\CustomersApp\CustomersApp.csproj" />
-    <ProjectReference Include="..\..\..\Src\Applications\Customers\AddressesCustomerApp\AddressesCustomerApp.csproj" />
     <ProjectReference Include="..\..\..\Src\Infrastructures\Repositories\SessionsRepositories\SessionsRepositories.csproj" />
     <ProjectReference Include="..\..\..\Src\Infrastructures\Repositories\GenericRepository\GenericRepository.csproj" />
     <ProjectReference Include="..\..\..\Src\Infrastructures\Repositories\CustomersRepositories\CustomersRepositories.csproj" />
+    <ProjectReference Include="..\..\..\Src\Applications\Products\CategoriesApp\CategoriesApp.csproj" />
+    <ProjectReference Include="..\..\..\Src\Applications\Products\ManufacturersApp\ManufacturersApp.csproj" />
+    <ProjectReference Include="..\..\..\Src\Applications\Products\ProductsApp\ProductsApp.csproj" />
+    <ProjectReference Include="..\..\..\Src\Applications\Customers\SessionsApp\SessionsApp.csproj" />
+    <ProjectReference Include="..\..\..\Src\Applications\Customers\AddressesCustomerApp\AddressesCustomerApp.csproj" />
+    <ProjectReference Include="..\..\..\Src\Applications\Customers\CustomersApp\CustomersApp.csproj" />
+    <ProjectReference Include="..\..\..\Src\Applications\Customers\LoginsApp\LoginsApp.csproj" />
   </ItemGroup>
+
 
 </Project>

@@ -123,4 +123,20 @@ public class CategoriesAppMaintenance : ClassBaseMaintenance<CategoryApp>
             return new Return(ReturnValues.Success, categories);
         });
     }
+
+    public Task<Return> GetAsync(string id)
+    {
+        return Task.Run<Return>(() =>
+        {
+            var retaux = this._repository.GetAsync(new Category(id, "", "")).GetAwaiter().GetResult();
+
+            if (retaux.IsNull())
+            {
+                this.AddNotification("Category", "Category not found");
+                return new Return(ReturnValues.Failed, this.GetAllNotifications);
+            }
+
+            return new Return(ReturnValues.Success, new CategoryApp().Load(retaux));
+        });
+    }
 }

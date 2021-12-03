@@ -1,11 +1,7 @@
 using System;
-using System.Globalization;
-using System.Linq;
-using System.Security;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Reflection;
-using System.Collections.Generic;
 
 namespace InteliSystem.Utils.Extensions
 {
@@ -76,8 +72,11 @@ namespace InteliSystem.Utils.Extensions
                                     if ((innerprop.PropertyType == typeof(string)) && loadedprop.PropertyType == typeof(Guid))
                                      innerprop.SetValue(innerobject, value.ObjectToString());
                                  else
-                                        if ((innerprop.PropertyType == typeof(Guid) && loadedprop.PropertyType == typeof(string)))
+                                    if ((innerprop.PropertyType == typeof(Guid) && loadedprop.PropertyType == typeof(string)))
                                      innerprop.SetValue(innerobject, new Guid(value.ObjectToString()));
+                                 else
+                                    if (innerprop.PropertyType == typeof(string) && loadedprop.PropertyType.BaseType == typeof(Enum))
+                                     innerprop.SetValue(innerobject, ((Enum)value).Description());
                                  else
                                      innerprop.SetValue(innerobject, value);
                              }

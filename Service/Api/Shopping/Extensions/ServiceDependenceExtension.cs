@@ -5,8 +5,6 @@ using InteliSystem.InteliMarketPlace.Applications.LoginsApp;
 using InteliSystem.InteliMarketPlace.Applications.SessionsApp;
 using InteliSystem.InteliMarketPlace.Repositories.CustomersRepositories;
 using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using SessionsRepositories;
 
 namespace Shopping.Extensions

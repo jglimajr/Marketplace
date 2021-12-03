@@ -40,23 +40,37 @@ namespace InteliSystem.InteliMarketPlace.Applications.SessionsApp
                 var token = JwtAuthentication.GetToken(user);
                 var refreshtoken = JwtAuthentication.GetRefreshToken();
 
-                var session = new Session(id, app.IdCustomer, app.Device, token, refreshtoken);
+                var existsession = this._repository.GetRefreshTokenAsync(app.IdCustomer.ObjectToString(), app.Device).GetAwaiter().GetResult();
 
-                if (session.ExistNotifications)
+                Session session = null;
+                var retAux = 0;
+                if (existsession.IsNull())
                 {
-                    this.AddNotifications(session.GetAllNotifications);
-                    return new Return(ReturnValues.Failed, null);
+                    session = new Session(id, app.IdCustomer, app.Device, token, refreshtoken);
+
+                    if (session.ExistNotifications)
+                    {
+                        this.AddNotifications(session.GetAllNotifications);
+                        return new Return(ReturnValues.Failed, null);
+                    }
+
+                    retAux = this._repository.AddAsync(session).GetAwaiter().GetResult();
+                    if (retAux <= 0)
+                    {
+                        this.AddNotification("Session", "Problem to save your session");
+                        return new Return(ReturnValues.Failed, null);
+                    }
+
+                    return new Return(ReturnValues.Success, new SessionApp().Load(session));
                 }
 
-                var retAux = this._repository.AddAsync(session).GetAwaiter().GetResult();
+                session = new Session(existsession.Id, existsession.IdCustomer, existsession.Device, token, refreshtoken);
+
+                retAux = this._repository.UpdateAsync(existsession).GetAwaiter().GetResult();
                 if (retAux <= 0)
-                {
-                    this.AddNotification("Session", "Problem to save your session");
                     return new Return(ReturnValues.Failed, null);
-                }
 
                 return new Return(ReturnValues.Success, new SessionApp().Load(session));
-
             });
         }
 

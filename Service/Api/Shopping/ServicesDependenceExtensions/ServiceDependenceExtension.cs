@@ -26,7 +26,7 @@ namespace InteliSystem.InteliMarketPlace.Api.Shopping.ServicesDependenceExtensio
             services.AddTransient<CustomersAppMaintenance>();
             services.AddTransient<LoginsAppMaintenance>();
             services.AddTransient<SessionAppMaintenance>();
-            services.AddTransient<AddressesCustomerAppMaintenance>();
+            // services.AddTransient<AddressesCustomerAppMaintenance>();
             // //-------------
             // //Config Repository
             services.AddTransient<ICustomersRepository, CustomersRepositories>();

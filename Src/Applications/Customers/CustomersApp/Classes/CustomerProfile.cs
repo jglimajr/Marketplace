@@ -7,7 +7,7 @@ namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp.Classes
     {
         public string Name { get; set; }
         public string BirthDate { get; set; }
-        public GenderValues Gender { get; set; }
+        public string Gender { get; set; }
         public string EMail { get; set; }
     }
 }
