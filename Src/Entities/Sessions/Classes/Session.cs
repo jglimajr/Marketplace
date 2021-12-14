@@ -4,7 +4,7 @@ using InteliSystem.Utils.Extensions;
 using InteliSystem.Utils.Globals.Classes;
 using InteliSystem.Utils.Globals.Enumerators;
 
-namespace InteliSystem.InteliMarketPlace.Domains.Sessions
+namespace InteliSystem.InteliMarketPlace.Entities.Sessions
 {
     [Table("Sessions")]
     public class Session : ClassBaseGuid

@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using InteliSystem.InteliMarketPlace.Domains.Sessions;
+using InteliSystem.InteliMarketPlace.Entities.Sessions;
 using InteliSystem.Utils.Authentications;
 using InteliSystem.Utils.Extensions;
 using InteliSystem.Utils.Globals.Classes;

@@ -24,9 +24,9 @@ namespace Utils.Globals.Notifications
             });
         }
         [WriteProperty(false)]
-        public Dictionary<string, string> GetAllNotifications => this._messages;
+        public virtual Dictionary<string, string> GetAllNotifications => this._messages;
         [WriteProperty(false)]
-        public bool ExistNotifications => (this._messages.Count > 0);
+        public virtual bool ExistNotifications => (this._messages.Count > 0);
 
     }
 }

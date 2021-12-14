@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using InteliSystem.InteliMarketPlace.Domains.Sessions;
+using InteliSystem.InteliMarketPlace.Entities.Sessions;
 using InteliSystem.InteliMarketPlace.Repositories;
 using InteliSystem.Utils.Globals.Interfaces;
 

@@ -5,7 +5,7 @@ using InteliSystem.Utils.Extensions;
 using InteliSystem.Utils.Globals.Classes;
 using InteliSystem.Utils.Globals.Enumerators;
 
-namespace InteliSystem.InteliMarketPlace.Domains.Customers
+namespace InteliSystem.InteliMarketPlace.Entities.Customers
 {
     [Table("[Customers]")]
     public class Customer : ClassBaseGuid

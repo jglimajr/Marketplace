@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using InteliSystem.InteliMarketPlace.Domains.AddressesCustomer;
+using InteliSystem.InteliMarketPlace.Entities.AddressesCustomer;
 using InteliSystem.Utils.Extensions;
 using InteliSystem.Utils.Globals.Classes;
 using InteliSystem.Utils.Globals.Classes.Abstracts;

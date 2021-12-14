@@ -5,7 +5,7 @@ using InteliSystem.Utils.Globals.Enumerators;
 using InteliSystem.Utils.Globals.Functions;
 using Utils.Globals.Notifications;
 
-namespace InteliSystem.InteliMarketPlace.Domains.Products
+namespace InteliSystem.InteliMarketPlace.Entities.Products
 {
     public class Category : InteliNotification
     {

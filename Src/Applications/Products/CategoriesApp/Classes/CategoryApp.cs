@@ -1,4 +1,4 @@
-using InteliSystem.InteliMarketPlace.Domains.Products;
+using InteliSystem.InteliMarketPlace.Entities.Products;
 using InteliSystem.Utils.Globals.Classes;
 
 namespace InteliSystem.InteliMarketPlace.Applications.CategoriesApp;

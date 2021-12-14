@@ -1,5 +1,5 @@
 
-using InteliSystem.InteliMarketPlace.Domains.Products;
+using InteliSystem.InteliMarketPlace.Entities.Products;
 using InteliSystem.InteliMarketPlace.Repositories;
 using InteliSystem.Utils.Extensions;
 using InteliSystem.Utils.Globals.Classes;

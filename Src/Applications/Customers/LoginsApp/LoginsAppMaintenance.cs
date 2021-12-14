@@ -5,7 +5,7 @@ using InteliSystem.Utils.Extensions;
 using InteliSystem.Utils.Globals.Classes;
 using InteliSystem.Utils.Globals.Enumerators;
 using Utils.Globals.Notifications;
-using InteliSystem.InteliMarketPlace.Domains.Customers;
+using InteliSystem.InteliMarketPlace.Entities.Customers;
 
 namespace InteliSystem.InteliMarketPlace.Applications.LoginsApp
 {

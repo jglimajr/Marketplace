@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using InteliSystem.InteliMarketPlace.Domains.Customers;
+using InteliSystem.InteliMarketPlace.Entities.Customers;
 using InteliSystem.InteliMarketPlace.Repositories;
 using InteliSystem.Utils.Globals.Interfaces;
 

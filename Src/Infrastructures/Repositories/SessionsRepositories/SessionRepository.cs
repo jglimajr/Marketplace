@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using InteliSystem.InteliMarketPlace.Applications.SessionsApp;
-using InteliSystem.InteliMarketPlace.Domains.Sessions;
+using InteliSystem.InteliMarketPlace.Entities.Sessions;
 using InteliSystem.InteliMarketPlace.Repositories;
 using InteliSystem.Utils.Dapper.Extensions;
 using Microsoft.VisualBasic;

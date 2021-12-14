@@ -7,7 +7,7 @@ using InteliSystem.InteliMarketPlace.Applications.CustomersApp.Repositories;
 using InteliSystem.Utils.Extensions;
 using InteliSystem.Utils.Globals.Classes;
 using InteliSystem.Utils.Globals.Enumerators;
-using InteliSystem.InteliMarketPlace.Domains.Customers;
+using InteliSystem.InteliMarketPlace.Entities.Customers;
 using Utils.Globals.Notifications;
 
 namespace InteliSystem.InteliMarketPlace.Applications.CustomersApp

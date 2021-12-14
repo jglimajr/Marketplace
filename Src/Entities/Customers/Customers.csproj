@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>InteliSystem.InteliMarketPlace.Domains.Customers</RootNamespace>
-    <AssemblyName>InteliSystem.InteliMarketPlace.Domains.Customers</AssemblyName>
+    <RootNamespace>InteliSystem.InteliMarketPlace.Entities.Customers</RootNamespace>
+    <AssemblyName>InteliSystem.InteliMarketPlace.Entities.Customers</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
